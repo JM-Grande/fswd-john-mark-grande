@@ -1,0 +1,370 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Global Css */
+a {
+    text-decoration: none;
+    color: white;
+}
+
+
+body {
+    padding: 0 5% 0 5%;
+}
+
+/* Global Css */
+
+
+/* Navbar Styles */
+header {
+    background-color: white;
+    min-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    align-content: center;
+    position: sticky;
+    top: 0;
+}
+
+header .logo {
+    font-size: 30px;
+}
+
+header a {
+    color: black;
+}
+
+header .navbar ul {
+    display: flex;
+}
+
+header .navbar ul li {
+    list-style-type: none;
+}
+
+header .navbar ul li a {
+    text-decoration: none;
+    padding: 0 10px;
+}
+
+header .navbar ul li a:hover {
+    font-size: 18px;
+    border-bottom: 3px solid gray;
+}
+
+header .icons i {
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+header .toggle {
+    display: none;
+}
+
+/* Navbar Styles */
+
+
+/* Class Container Styles */
+.container {
+    max-width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)),
+        url(../images/cover1.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    padding: 100px;
+}
+
+.container h1 {
+    font-size: 60px;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.container p {
+    line-height: 1;
+    margin-bottom: 40px;
+}
+
+.container .container-item {
+    max-width: 100%;
+    max-height: 100%;
+    padding: 150px 0px 0px 0px;
+}
+
+.container .container-item a {
+    border: 1px solid white;
+    padding: 10px;
+    margin: 0 15px;
+}
+
+.container .container-item a:hover {
+    background-color: white;
+    color: black;
+}
+
+/* Class Container Styles */
+
+/* Container-2 */
+.container2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    min-height: 550px;
+}
+
+.container2 h1 {
+    font-size: 50px;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.container2 p {
+    margin-bottom: 20px;
+}
+
+.container2 .item-1 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.16)), url(../images/smartphone.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    flex-basis: 35%;
+    padding: 30px;
+}
+
+.container2 .item-1 .item-1-con {
+    border: 2px solid white;
+    width: 100%;
+    height: 100%;
+    color: white;
+    padding: 80px 0 0 40px;
+}
+
+
+.container2 .item-2 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.548), rgba(0, 0, 0, 0.548)), url(../images/camera.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no repeat;
+    flex-basis: 63%;
+    color: white;
+    padding: 50px;
+}
+
+.container2 .item-2 .item-2-con {
+    background-color: rgba(0, 0, 0, .63);
+    max-width: 600px;
+    height: 100%;
+    padding: 45px 120px 0px 30px;
+}
+
+
+/* End of Container-2 */
+
+/* Container 3 */
+.container3 {
+    margin-top: 20px;
+    max-width: 100%;
+    height: auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.container3 .item {
+    min-width: 250px;
+    min-height: auto;
+    margin: 20px 20px;
+}
+
+.container3 .item img {
+    background-position: center;
+    background-size: cover;
+    min-width: 100%;
+    max-height: 250px;
+}
+
+/* End of Container 3 */
+
+/* Container 4 */
+.container4 {
+    background-image: url(../images/con-4-1.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    max-width: 100%;
+    min-height: 350px;
+    margin: 20px 75px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 50px;
+    color: white;
+}
+
+.container4 .item {
+    background-color: #e95a5a;
+    max-width: 400px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 40px;
+}
+
+.container4 h1 {
+    font-size: 50px;
+    line-height: 1;
+}
+
+.container4 p {
+    margin: 30px 0;
+}
+
+/* End 0f Container 4 */
+
+/* Footer */
+.footer {
+    background-color: lightgray;
+    max-width: 100%;
+    min-height: 130px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+}
+
+.footer a {
+    color: black;
+    font-size: 30px;
+}
+
+.footer .icons a {
+    font-size: 16px;
+}
+
+/* End of Footer */
+
+
+/* Other Pages Global CSS */
+
+/* Input Class:Text Styles */
+.text {
+    border: none;
+    min-width: 300px;
+    padding: 10px 2px;
+    background-color: #f2f4f8;
+    margin-bottom: 10px;
+}
+
+/* Log In and Register Span Link */
+.log-link {
+    color: black;
+    font-size: 12px;
+}
+
+.log-link:hover {
+    font-size: 15px;
+    text-decoration: underline;
+}
+
+/* Submit Button Styles */
+.sub-btn {
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+}
+
+.sub-btn:hover {
+    background-color: black;
+    color: white;
+}
+
+/* Other Pages Global CSS */
+
+/* Sign Up CSS */
+.signup-container {
+    /* background-color: antiquewhite; */
+    background-image: url(../images/signup1.jpg);
+    display: flex;
+    justify-content: flex-start;
+    background-size: cover;
+    background-position: center;
+    max-width: 100%;
+    min-height: 100vh;
+}
+
+.signup-container .sign-up {
+    margin-left: 30px;
+}
+
+.signup-container .sign-up h2 {
+    margin-bottom: 10px;
+}
+
+.signup-container .sign-up .select {
+    margin-bottom: 10px;
+}
+
+.signup-container .sign-up .chk-box {
+    margin-bottom: 20px;
+}
+
+/* Sign Up CSS */
+
+
+/* Log In CSS */
+.log-container {
+    background-image: url(../images/signup1.jpg);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    max-width: 100%;
+    min-height: 100vh;
+}
+
+.log-container .log-in {
+    margin-left: 30px;
+}
+
+.log-container h2 {
+    margin-bottom: 10px;
+}
+
+
+/* Log In CSS */
+
+
+/* Forgot CSS */
+.forgot-container {
+    background-image: url(../images/signup1.jpg);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    max-width: 100%;
+    min-height: 100vh;
+}
+
+.forgot-container .forgot {
+    margin-left: 30px;
+}
+
+/* Forgot CSS */
