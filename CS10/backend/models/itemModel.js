@@ -33,7 +33,7 @@ const itemSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
-    presalePrice: {
+    preSalePrice: {
       type: Number,
       required: true,
       default: 0,

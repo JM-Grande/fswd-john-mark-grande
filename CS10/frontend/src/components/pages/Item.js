@@ -76,38 +76,40 @@ const Item = () => {
   // End of Back Button
 
   // Counter
-  const InStock = `${item.countInStock}`;
-  const [quantity, setQuantity] = useState(1);
-  const [isAddDisabled, setAddDisabled] = useState(false);
-  const [isMinusDisabled, setMinusDisabled] = useState(false);
-  const [stock, setStock] = useState(InStock - quantity);
+  // const InStock = `${item.countInStock}`;
 
-  if (quantity === 0) {
-    setQuantity(1);
-    setStock(InStock - 1);
-    setMinusDisabled(true);
-  }
+  // const [isAddDisabled, setAddDisabled] = useState(false);
+  // const [isMinusDisabled, setMinusDisabled] = useState(false);
+  // const [stock, setStock] = useState(InStock);
 
-  const addCount = () => {
-    setQuantity(quantity + 1);
-    setStock(stock - 1);
+  // if (quantity === 0) {
+  //   setQuantity(1);
+  //   setStock(InStock - 1);
+  //   setMinusDisabled(true);
+  // }
 
-    if (stock === 1) {
-      setAddDisabled(true);
-    } else if (quantity > 0) {
-      setMinusDisabled(false);
-    }
-  };
+  // const addCount = () => {
+  //   setQuantity(quantity + 1);
+  //   setStock(stock - 1);
 
-  const minusCount = () => {
-    setQuantity(quantity - 1);
-    setStock(stock + 1);
+  //   if (stock === 1) {
+  //     setAddDisabled(true);
+  //   } else if (quantity > 0) {
+  //     setMinusDisabled(false);
+  //   }
+  // };
 
-    if (stock < 1) {
-      setAddDisabled(false);
-    }
-  };
+  // const minusCount = () => {
+  //   setQuantity(quantity - 1);
+  //   setStock(stock + 1);
+
+  //   if (stock < 1) {
+  //     setAddDisabled(false);
+  //   }
+  // };
   //End of Counter
+  let inStock = item.countInStock;
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <>
@@ -176,9 +178,11 @@ const Item = () => {
             <Stack direction="row" alignItems="center" gap=".5em" mt="4em">
               <IconBtn
                 aria-label="minus"
-                onClick={minusCount}
+                onClick={() => {
+                  setQuantity(quantity - 1);
+                }}
                 size="small"
-                disabled={isMinusDisabled}
+                disabled={quantity === 1}
               >
                 <RemoveIcon />
               </IconBtn>
@@ -194,19 +198,23 @@ const Item = () => {
 
               <IconBtn
                 aria-label="plus"
-                onClick={addCount}
+                onClick={() => {
+                  setQuantity(quantity + 1);
+                }}
                 size="small"
-                disabled={isAddDisabled}
+                disabled={item.countInStock === quantity}
               >
                 <AddIcon />
               </IconBtn>
             </Stack>
 
             <Stack mt="1em">
-              {stock === 0 ? (
-                <Typography variant="span">{stock} Out of Stock</Typography>
+              {inStock > 1 ? (
+                <Typography variant="span">
+                  {inStock} piece available
+                </Typography>
               ) : (
-                <Typography variant="span">{stock} piece available</Typography>
+                "Out of stock"
               )}
             </Stack>
             {/*End of Counter */}
