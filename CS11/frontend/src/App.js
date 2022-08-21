@@ -16,7 +16,7 @@ const App = () => {
       <Box component="main">
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/Cart" element={<Cart />} />
+          <Route path="/Cart/:id" element={<Cart />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Forgot" element={<Forgot />} />
           <Route path="/Registration" element={<Registration />} />

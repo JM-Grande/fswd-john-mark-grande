@@ -4,6 +4,8 @@ import { Button, Menu, MenuItem, Fade } from "@mui/material";
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
+import { useSelector } from "react-redux";
+
 // Styled Components
 const StyledToolBar = styled(Toolbar)({
   display: "flex",
@@ -44,6 +46,11 @@ const Header = () => {
     setAnchorEl(null);
   };
 
+  //display cart quantity
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+  //end of display cart quantity
+
   return (
     <>
       <Box>
@@ -54,8 +61,8 @@ const Header = () => {
             </Typography>
             {/* Icon And Account Button */}
             <UserBox>
-              <StyledLink to="/Cart">
-                <StyledBadge badgeContent={4}>
+              <StyledLink to={`/Cart/${cartItems.length}`}>
+                <StyledBadge badgeContent={cartItems.length}>
                   <ShoppingCartIcon />
                 </StyledBadge>
               </StyledLink>

@@ -79,6 +79,10 @@ const Item = () => {
 
   const [quantity, setQuantity] = useState(1);
 
+  const handleAddCart = () => {
+    navigate(`/Cart/${id}?qty=${quantity}`);
+  };
+
   return (
     <>
       {isLoading ? (
@@ -199,6 +203,7 @@ const Item = () => {
                   size="large"
                   width="20px"
                   disabled={item.countInStock === 0}
+                  onClick={handleAddCart}
                 >
                   Add to Cart
                 </CartBtn>

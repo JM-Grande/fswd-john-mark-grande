@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Stack,
@@ -6,205 +6,184 @@ import {
   styled,
   Button,
   TextField,
+  IconButton,
+  Card,
 } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import { useNavigate, useParams, useLocation, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../../actions/cartActions.js";
+import Message from "../Message.js";
 
 // Styled Components
-
-const MainBox = styled(Box)({
-  margin: "0 auto",
-  height: "100vh",
-  paddingTop: "5em",
-});
-
-const NavStack = styled(Stack)({
-  justifyContent: "flex-end",
-  maxWidth: "95%",
-  margin: "0 auto",
-  backgroundColor: "black",
-  color: "white",
-  padding: "1.5em 0",
-});
-
-const TopTypography = styled(Typography)({
-  marginRight: "7em",
-});
-
-const ItemBox = styled(Box)({
-  backgroundColor: "white",
-  maxWidth: "95%",
-  height: "auto",
-  margin: "0 auto",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  padding: "1em 0",
-  borderBottom: ".5px solid rgba(0, 0, 0, 0.2)",
-});
-
-const ItemBoxContent = styled(Typography)({
-  marginRight: "6.5em",
-});
-
-const TotalBox = styled(Box)({
-  border: ".5px solid rgba(0, 0, 0, 0.2)",
-  maxWidth: "30%",
-  margin: "0 auto",
-  marginTop: "2em",
-  padding: "1em",
-});
-
-const TotalStack = styled(Stack)({
-  gap: "1em",
-});
-
-const TotalStackItem = styled(Stack)({
-  justifyContent: "space-between",
+const BackBtn = styled(Button)({
+  marginLeft: "4em",
+  marginBottom: "2em",
+  color: "black",
 });
 
 const Divider = styled(Box)({
-  border: ".5px solid rgba(0, 0, 0, 0.2)",
+  maxWidth: "100%",
+  border: "1px solid rgba(0, 0, 0, 0.2)",
+  margin: "1em 0",
 });
 
-const ChkOutButton = styled(Button)({
-  color: "white",
+const TotalStack = styled(Stack)({
+  marginLeft: "auto",
+  marginRight: "2em",
+  gap: "1em",
+  paddingBottom: "2em",
+});
+
+const CheckOutButton = styled(Button)({
   backgroundColor: "black",
+  color: "white",
   padding: "1em",
-  marginTop: "2em",
-  borderRadius: "25px",
+  borderRadius: "30px",
   "&:hover": {
-    color: "black",
     backgroundColor: "white",
-    border: ".5px solid rgba(0, 0, 0, 0.2)",
+    color: "black",
+    border: ".5px solid gray",
   },
 });
+
 //End of Styled Components
 
 const Cart = () => {
+  // Back Button
+  const navigate = useNavigate();
+  const navigateClick = () => {
+    navigate("/");
+  };
+  // End of Back Button
+
+  // display cart items
+  let { id } = useParams();
+  const itemId = id;
+  const location = useLocation();
+  const qty = location.search ? Number(location.search.split("=")[1]) : 1;
+  const dispatch = useDispatch();
+
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+
+  useEffect(() => {
+    if (itemId) {
+      dispatch(addToCart(itemId, qty));
+    }
+  }, [dispatch, itemId, qty]);
+  // end of display cart items
+
   return (
     <>
-      <MainBox sx={{ maxWidth: { xs: "90%", sm: "80%", md: "70%" } }}>
-        <NavStack direction="row">
-          <TopTypography variant="span">Product</TopTypography>
-          <TopTypography variant="span">Price</TopTypography>
-          <TopTypography variant="span">Quantity</TopTypography>
-          <TopTypography variant="span">Total</TopTypography>
-        </NavStack>
+      <BackBtn startIcon={<ChevronLeftIcon />} onClick={navigateClick}>
+        Go Back
+      </BackBtn>
+      <Box
+        sx={{ maxWidth: { xs: "90%", sm: "80%", md: "70%" }, margin: "0 auto" }}
+      >
+        <Typography variant="h4">CART</Typography>
+        {cartItems.length === 0 ? (
+          <Message>You've cleared out your cart!</Message>
+        ) : (
+          <>
+            {cartItems.map((item) => (
+              // display items
+              <Card
+                sx={{ padding: "0 1.5em", marginBottom: "1em" }}
+                key={item.id}
+              >
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <Stack
+                    sx={{
+                      maxHeight: { xs: "100px", lg: "200px" },
+                      maxWidth: { xs: "100px", md: "100px", lg: "200px" },
+                    }}
+                  >
+                    <img src={item.image} alt={item.name} />
+                  </Stack>
 
-        <ItemBox>
-          <ItemBoxContent>
-            <Button
-              size="small"
-              sx={{
-                color: "black",
-                padding: "1 0",
-              }}
-            >
-              <ClearIcon />
-            </Button>
-          </ItemBoxContent>
+                  <Stack display={{ xs: "none", md: "block", lg: "block" }}>
+                    <Link to={`/item/${itemId}`}>
+                      <Typography variant="h5">{item.name}</Typography>
+                    </Link>
+                    <Typography variant="span">by: {item.brand}</Typography>
+                    <Typography variant="h6" sx={{ marginTop: "1em" }}>
+                      $ {item.price}
+                    </Typography>
+                  </Stack>
 
-          <ItemBoxContent>
-            <Stack direction="row">
-              <Stack sx={{ maxWidth: "100px" }}>
-                <img
-                  src="https://images.unsplash.com/photo-1605436247078-f0ef43ee8d5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fGtleWJvYXJkfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-                  alt="keyboard"
-                />
-              </Stack>
+                  <Stack direction="row" gap=".5em">
+                    <Typography variant="span">Quantity</Typography>
+                    <IconButton
+                      onClick={() => {
+                        dispatch(addToCart(item.id, --item.qty));
+                      }}
+                      disabled={item.qty === 1}
+                    >
+                      <RemoveIcon />
+                    </IconButton>
 
-              <Stack ml="1em">
-                <Typography variant="h6">Keyboard</Typography>
-                <Typography variant="span">Smooth Keyboard</Typography>
-              </Stack>
-            </Stack>
-          </ItemBoxContent>
+                    <TextField
+                      size="small"
+                      sx={{ width: "4em" }}
+                      value={item.qty}
+                    />
 
-          <ItemBoxContent>
-            <Typography variant="span">$300</Typography>
-          </ItemBoxContent>
+                    <IconButton
+                      onClick={() => {
+                        dispatch(addToCart(item.id, ++item.qty));
+                      }}
+                      disabled={item.qty === item.stock}
+                    >
+                      <AddIcon />
+                    </IconButton>
+                  </Stack>
 
-          <ItemBoxContent sx={{ maxWidth: "5em" }}>
-            <TextField size="small" />
-          </ItemBoxContent>
+                  <IconButton
+                    onClick={() => {
+                      dispatch(removeFromCart(item.id));
+                    }}
+                  >
+                    <ClearIcon />
+                  </IconButton>
+                </Stack>
+              </Card>
+              // End of display items
+            ))}
+          </>
+        )}
 
-          <ItemBoxContent>
-            <Typography variant="span">$300</Typography>
-          </ItemBoxContent>
-        </ItemBox>
+        <Divider></Divider>
 
-        {/* <ItemBox>
-          <ItemBoxContent>
-            <Button
-              size="small"
-              sx={{
-                color: "black",
-                padding: "1 0",
-              }}
-            >
-              <ClearIcon />
-            </Button>
-          </ItemBoxContent>
-
-          <ItemBoxContent>
-            <Stack direction="row">
-              <Stack sx={{ maxWidth: "100px" }}>
-                <img
-                  src="https://images.unsplash.com/photo-1605436247078-f0ef43ee8d5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fGtleWJvYXJkfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-                  alt="keyboard"
-                />
-              </Stack>
-
-              <Stack ml="1em">
-                <Typography variant="h6">Keyboard</Typography>
-                <Typography variant="span">Smooth Keyboard</Typography>
-              </Stack>
-            </Stack>
-          </ItemBoxContent>
-
-          <ItemBoxContent>
-            <Typography variant="span">$300</Typography>
-          </ItemBoxContent>
-
-          <ItemBoxContent sx={{ maxWidth: "5em" }}>
-            <TextField size="small" />
-          </ItemBoxContent>
-
-          <ItemBoxContent>
-            <Typography variant="span">$300</Typography>
-          </ItemBoxContent>
-        </ItemBox> */}
-
-        <TotalBox>
-          <Typography variant="h5" mb="1em">
-            CART TOTALS
-          </Typography>
-
+        {/* Total Order */}
+        <Stack>
           <TotalStack>
-            <TotalStackItem direction="row">
-              <Typography variant="span">Sub Total</Typography>
-              <Typography variant="span">$300</Typography>
-            </TotalStackItem>
-            <TotalStackItem direction="row">
-              <Typography variant="span">Delivery</Typography>
-              <Typography variant="span">$0</Typography>
-            </TotalStackItem>
-            <TotalStackItem direction="row">
-              <Typography variant="span">Discount</Typography>
-              <Typography variant="span">$0</Typography>
-            </TotalStackItem>
-            <Divider></Divider>
-            <TotalStackItem direction="row">
-              <Typography variant="span">TOTAL</Typography>
-              <Typography variant="span">
-                <b>$300</b>
-              </Typography>
-            </TotalStackItem>
+            <Typography variant="h6">
+              Total: $
+              {cartItems
+                .reduce((accu, item) => accu + item.price * item.qty, 0)
+                .toFixed(2)}
+            </Typography>
+            <Typography variant="span">
+              Qty: {cartItems.reduce((accu, item) => accu + item.qty, 0)}{" "}
+              Item(s)
+            </Typography>
+            <CheckOutButton startIcon={<AttachMoneyIcon />}>
+              Check Out
+            </CheckOutButton>
           </TotalStack>
-
-          <ChkOutButton>Proceed to Checkout</ChkOutButton>
-        </TotalBox>
-      </MainBox>
+        </Stack>
+        {/*End Total Order */}
+      </Box>
     </>
   );
 };
