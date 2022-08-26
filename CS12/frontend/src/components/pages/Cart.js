@@ -113,7 +113,7 @@ const Cart = () => {
 
                   <Stack display={{ xs: "none", md: "block", lg: "block" }}>
                     {/* <Link to={`/item/${itemId}`}> */}
-                      <Typography variant="h5">{item.name}</Typography>
+                    <Typography variant="h5">{item.name}</Typography>
                     {/* </Link> */}
                     <Typography variant="span">by: {item.brand}</Typography>
                     <Typography variant="h6" sx={{ marginTop: "1em" }}>
