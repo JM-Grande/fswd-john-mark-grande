@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Stack, Typography, TextField } from "@mui/material";
+import { Box, Stack, Typography, TextField, styled } from "@mui/material";
 import {
   RadioGroup,
   FormControlLabel,
@@ -9,26 +9,45 @@ import {
   Button,
 } from "@mui/material";
 
+//styled components
+const MainBox = styled(Box)({
+  height: "100vh",
+  margin: "0 auto",
+});
+
+const SignUpText = styled(Typography)({
+  textAlign: "center",
+  margin: "2em 0",
+});
+
+const FormStack = styled(Stack)({
+  margin: "0 auto",
+  border: ".5px solid gray",
+  padding: "3em",
+  borderRadius: "30px",
+});
+
+const SignUpButton = styled(Button)({
+  margin: "1em 0",
+  backgroundColor: "black",
+  color: " white",
+  padding: "1em",
+  "&:hover": { color: " black", border: ".5px solid gray" },
+});
+//end of styled components
+
 const Registration = () => {
   return (
     <>
-      <Box
+      <MainBox
         sx={{
           maxWidth: { xs: "90%", sm: "80%", md: "50%" },
-          height: "100vh",
-          margin: "0 auto",
         }}
       >
-        <Typography variant="h4" textAlign="center" mt="2em" mb="2em">
-          Sign Up
-        </Typography>
-        <Stack
+        <SignUpText variant="h4">Sign Up</SignUpText>
+        <FormStack
           sx={{
             maxWidth: { xs: "90%", sm: "80%" },
-            margin: "0 auto",
-            border: ".5px solid gray",
-            padding: "3em",
-            borderRadius: "30px",
           }}
         >
           <TextField id="standard-basic" label="Email" variant="standard" />
@@ -66,20 +85,15 @@ const Registration = () => {
             </FormGroup>
           </Stack>
 
-          <Button
+          <SignUpButton
             sx={{
               maxWidth: { xs: "100%", sm: "50%", md: "25%" },
-              margin: "1em 0",
-              backgroundColor: "black",
-              color: " white",
-              padding: "1em",
-              "&:hover": { color: " black", border: ".5px solid gray" },
             }}
           >
             Sign Up
-          </Button>
-        </Stack>
-      </Box>
+          </SignUpButton>
+        </FormStack>
+      </MainBox>
     </>
   );
 };
