@@ -6,7 +6,7 @@ let htmlString = "";
 for (let i = 1; i <= 12; i++) {
   htmlString += `<div class="item">
             <div class="item-img">
-                <img src="../CS3/images/phone.jpg">
+                <img src="./images/phone.jpg">
             </div>
             <div class="item-content">
                 <h3>Smart Phone</h3>
