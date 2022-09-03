@@ -49,7 +49,7 @@ export const userRegisterReducer = (state = {}, action) => {
 };
 
 // display user/profile
-export const userProfileReducer = (state = { userInfo: {} }, action) => {
+export const userProfileReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case USER_PROFILE_REQUEST:
       return { isLoading: true, ...state };
